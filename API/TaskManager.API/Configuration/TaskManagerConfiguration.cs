@@ -1,11 +1,15 @@
 ﻿
 
+using Employee.Infrastructure.Persistence.Repository.UserRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager.Domain.Entities;
+using TaskManager.Domain.Interfaces;
+using TaskManager.Domain.Interfaces.IUserRepository;
+using TaskManager.Domain.Services;
 using TaskManager.Infrastructure.Persistence.EFCore;
 
 namespace TaskManager.API.Configuration
@@ -51,8 +55,13 @@ namespace TaskManager.API.Configuration
                       };
                   });
 
+            //application Serrvice
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJwtTokenManager, JwtTokenManager>();
+            //application repository
+            services.AddScoped<IUserReadRepository, UserReadRepository>();
+            services.AddScoped<IUserWriteRepository, UserWriteRepository>();
 
-           
         }
 
     }
