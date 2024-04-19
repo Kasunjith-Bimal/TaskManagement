@@ -31,20 +31,21 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
-                var employeeList = await this._userManager.GetUsersInRoleAsync("USER");
+                this.logger.LogInformation($"[UserReadRepository:GetAllUsersAsync] recieved event");
+                var userList = await this._userManager.GetUsersInRoleAsync("USER");
 
-                if(employeeList != null)
+                if(userList != null)
                 {
-                    return (List<UserDetail>)employeeList;
+                    return (List<UserDetail>)userList;
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:GetAllUsersAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
         }
@@ -53,20 +54,21 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
-                var employee = await this._userManager.FindByIdAsync(userId);
+                this.logger.LogInformation($"[UserReadRepository:GetUserByIdAsync] recieved event userId :{userId}");
+                var user = await this._userManager.FindByIdAsync(userId);
 
-                if (employee != null)
+                if (user != null)
                 {
-                    return employee;
+                    return user;
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:GetUserByIdAsync]  userId :{userId}  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
         }
@@ -75,20 +77,21 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
-                var employee = await this._userManager.FindByEmailAsync(userEmail);
+                this.logger.LogInformation($"[UserReadRepository:GetUserByEmailAsync] recieved event userEmail :{userEmail}");
+                var user = await this._userManager.FindByEmailAsync(userEmail);
 
-                if (employee != null)
+                if (user != null)
                 {
-                    return employee;
+                    return user;
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:GetUserByEmailAsync]  userEmail :{userEmail}  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
         }
@@ -97,20 +100,21 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
-                var employeeList = await this._userManager.GetUsersInRoleAsync("ADMIN");
+                this.logger.LogInformation($"[UserReadRepository:GetAllAdminsAsync] recieved event");
+                var userList = await this._userManager.GetUsersInRoleAsync("ADMIN");
 
-                if (employeeList != null)
+                if (userList != null)
                 {
-                    return (List<UserDetail>)employeeList;
+                    return (List<UserDetail>)userList;
                 }
                 else
                 {
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:GetAllAdminsAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
         }
@@ -119,11 +123,12 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
+                this.logger.LogInformation($"[UserReadRepository:CheckPasswordAsync] recieved event");
                 return await _userManager.CheckPasswordAsync(user, passWord);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:CheckPasswordAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return await Task.FromResult(false);
             }
         }
@@ -132,11 +137,12 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
+                this.logger.LogInformation($"[UserReadRepository:GetUserRolesAsync] recieved event");
                 return await _userManager.GetRolesAsync(user);
             }
             catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserReadRepository:GetUserRolesAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
         }

@@ -29,16 +29,28 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
 
         public async Task<UserDetail> AddUser(UserDetail user,string tempoyryPassword,RoleType roleType)
         {
-            var result = await _userManager.CreateAsync(user, tempoyryPassword);
-            if (result.Succeeded)
+            try
             {
-                  await _userManager.AddToRoleAsync(user, Enum.GetName(typeof(RoleType), roleType));
-                  return user;
+                this.logger.LogInformation($"[UserWriteRepository:AddUser] recieved event");
+                var result = await _userManager.CreateAsync(user, tempoyryPassword);
+                if (result.Succeeded)
+                {
+                    this.logger.LogInformation($"[UserWriteRepository:AddUser]  success event");
+                    await _userManager.AddToRoleAsync(user, Enum.GetName(typeof(RoleType), roleType));
+                    return user;
+                }
+                else
+                {
+                    this.logger.LogInformation($"[UserWriteRepository:AddUser] not success event");
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                this.logger.LogDebug($"[UserWriteRepository:AddUser]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
+            
                 
         }
 
@@ -51,58 +63,76 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
+                this.logger.LogInformation($"[UserWriteRepository:ChangePasswordAsync] recieved event");
                 // remove strong passsword validater
                 _userManager.PasswordValidators.Clear();
                 var changePasswordResult = await _userManager.ChangePasswordAsync(user, oldPassword, NewPassword);
                 if (changePasswordResult.Succeeded)
                 {
+                    this.logger.LogInformation($"[UserWriteRepository:ChangePasswordAsync] success event");
                     return await Task.FromResult(true);
                 }
                 else
                 {
+                    this.logger.LogInformation($"[UserWriteRepository:ChangePasswordAsync] not success event");
                     return await Task.FromResult(false);
                 }
             }
             catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserWriteRepository:ChangePasswordAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return await Task.FromResult(false);
             }
         }
 
         public async Task<bool> DeleteUser(UserDetail user)
         {
-            var result = await _userManager.DeleteAsync(user);
-            if (result.Succeeded)
+            try
             {
-                return true;
+                this.logger.LogInformation($"[UserWriteRepository:DeleteUser] recieved event");
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    this.logger.LogInformation($"[UserWriteRepository:DeleteUser] success event");
+                    return true;
+                }
+                else
+                {
+                    this.logger.LogInformation($"[UserWriteRepository:DeleteUser] not success event");
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+
+                this.logger.LogDebug($"[UserWriteRepository:DeleteUser]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return false;
             }
+          
         }
 
         public async Task<UserDetail> RemoveAndAddRolesAsync(UserDetail user, IList<string> oldRoleType, RoleType newRoleType)
         {
             try
             {
-               
+                this.logger.LogInformation($"[UserWriteRepository:RemoveAndAddRolesAsync] recieved event");
                 var result =  await _userManager.RemoveFromRolesAsync(user, oldRoleType);
 
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, Enum.GetName(typeof(RoleType), newRoleType));
+                    this.logger.LogInformation($"[UserWriteRepository:RemoveAndAddRolesAsync] success event");
                     return user;
                 }
                 else
                 {
+                    this.logger.LogInformation($"[UserWriteRepository:RemoveAndAddRolesAsync] not success event");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserWriteRepository:RemoveAndAddRolesAsync]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
             
@@ -112,19 +142,22 @@ namespace Employee.Infrastructure.Persistence.Repository.UserRepository
         {
             try
             {
+                this.logger.LogInformation($"[UserWriteRepository:UpdateUser] recieved event");
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
+                    this.logger.LogInformation($"[UserWriteRepository:UpdateUser] success event");
                     return user;
                 }
                 else
                 {
+                    this.logger.LogInformation($"[UserWriteRepository:UpdateUser] not success event");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-
+                this.logger.LogDebug($"[UserWriteRepository:UpdateUser]  exception occurred: {ex.Message} - Stacktrace: {ex.StackTrace}");
                 return null;
             }
            
