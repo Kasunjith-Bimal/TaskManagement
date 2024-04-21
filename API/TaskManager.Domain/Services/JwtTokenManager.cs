@@ -17,25 +17,56 @@ namespace TaskManager.Domain.Services
     public class JwtTokenManager : IJwtTokenManager
     {
         private readonly IConfiguration configuration;
-        private readonly IUserService employeeService;
-        public JwtTokenManager(IConfiguration configuration, IUserService employeeService)
+        private readonly IUserService userService;
+        public JwtTokenManager(IConfiguration configuration, IUserService userService)
         {
             this.configuration = configuration;
-            this.employeeService = employeeService;
+            this.userService = userService;
         }
-        public async Task<Tuple<string, DateTime>> GenerateToken(UserDetail employee)
+
+        public async Task<ClaimsPrincipal> DecodeJwtAccessToken(string token)
+        {
+            try
+            {
+                //decrypt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+
+                // Prepare token validation parameters
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = configuration["JWT:ValidAudience"],
+                    ValidIssuer = configuration["JWT:ValidIssuer"],
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
+                };
+
+                // Validate the token signature
+                SecurityToken validatedToken;
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+
+                return principal;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Tuple<string, DateTime>> GenerateToken(UserDetail user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(this.configuration["JWT:Secret"]);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, employee.Id),
-                new Claim(ClaimTypes.Email, employee.Email),
-                new Claim(ClaimTypes.Name, employee.FullName)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.FullName)
                         // Add other claims as needed
             };
 
-            var roles = await employeeService.GetUserRolesAsync(employee);
+            var roles = await userService.GetUserRolesAsync(user);
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             DateTime expiry = DateTime.UtcNow.AddDays(7);
