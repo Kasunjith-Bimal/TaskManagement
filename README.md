@@ -144,10 +144,6 @@ protected override void OnModelCreating(ModelBuilder builder)
 ### Running the Application
 Run Web API application
 
-### API Database Structure 
-
-![Database Structure](Document/DbStracture.png)
-
 ## UI 
 -----------------------------------------------
 
@@ -177,12 +173,11 @@ export const environment = {
 
 ```bash
 # Clone Angular repo
-git clone https://github.com/Kasunjith-Bimal/Employee.git
+git clone https://github.com/Kasunjith-Bimal/TaskManagement.git
 
 # Navigate to project directory
-cd Employee
+cd TaskManagement
 cd UI
-cd employee
 # Install dependencies
 npm install
 
