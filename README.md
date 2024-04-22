@@ -13,6 +13,7 @@ The objective is to develop a secure and efficient web application that facilita
 - Automatic Email Notification: Upon adding an user, the system automatically sends an email with a temporary password, which the user can later change.
 - Task Updates: User can update their tasks details like title,description,isComplete or not ,due date.
 - Admins can toggle the active/inactive status of user profiles, restricting login access to active users only.
+- User releted task management.
 - More features...
 
 ## Technology Stack
