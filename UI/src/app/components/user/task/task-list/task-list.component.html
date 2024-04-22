@@ -1,9 +1,5 @@
+<app-task-loader *ngIf="isLoading"></app-task-loader > 
 <div class="container">
-  <!-- <div class="input-group" style="padding-bottom: 20px;padding-top:120;">
-      <div class="form-outline" data-mdb-input-init>
-        <input type="search" name="search" [(ngModel)]="searchText"  placeholder="search..."/>
-      </div>
-  </div> -->
   <Br>
   <div class="row">
     <div class="col-lg-6">
@@ -12,6 +8,14 @@
         </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-3">
+        <div class="input-group mb-3">
+            <button class="btn btn-primary form-control" (click)="onAddTask()">Add Task</button>
+        </div>
+    </div>
+  </div>
+  
   <div class="table">
       <div class="table-row">
         <div class="table-cell">Title</div>
@@ -24,6 +28,12 @@
       <app-task-list-item *ngFor="let task of tasks | taskSearch: searchText" [taskdetail]="task" (deleteTaskEvent)="deleteTaskEventClick($event)" (editTaskCheckBoxEvent)="editTaskCheckBoxEventChange($event)"></app-task-list-item>
   </div>
 </div>
+<div class="container">
+  <label> Add task using inline </label>
+  <input type="checkbox" name="showAddInile" [(ngModel)]="showAddInile" class="form-check">
+  <app-taskinline *ngIf="showAddInile" (addTaskInLineEvent)="addTaskInLineEventClick($event)" ></app-taskinline>
+</div>
+
 
 <app-confirmation-dialog *ngIf="showConfirmation" 
                          [message]="'Do you really want to delete this item?'"

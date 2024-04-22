@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -6,12 +6,13 @@ import { Task } from 'src/app/model/Task';
 import { TaskService } from 'src/app/services/task.service';
 
 @Component({
-  selector: 'app-task-form',
-  templateUrl: './task-form.component.html',
-  styleUrls: ['./task-form.component.css']
+  selector: 'app-taskinline',
+  templateUrl: './task-inline.component.html',
+  styleUrls: ['./task-inline.component.css']
 })
-export class TaskFormComponent implements OnInit {
+export class TaskinlineComponent implements OnInit {
   public isCreateTask : boolean = true;
+  @Output() addTaskInLineEvent = new EventEmitter<Task>();
   isLoading : boolean = false;
   taskForm!: FormGroup;
   taskId : number = 0;
@@ -115,11 +116,20 @@ export class TaskFormComponent implements OnInit {
     this.taskService.addTask(task).subscribe(
       (response: any) => {
         if(response.succeeded){
+          console.log(response);
           this.toastr.success('Task created successfully', 'Success');
           console.log('Task created successfully');
-          setTimeout(() => {
-            this.router.navigate(['user/tasks']);
-          }, 500);
+          this.addTaskInLineEvent.emit(response.payload.task);
+          let taskDate =  new Date(this.task.dueDate);
+          this.taskForm.setValue({
+            title: this.task.title,
+            description: this.task.description,
+            dueDate: taskDate.toISOString().split('T')[0],
+            isComplete : false
+          });
+          // setTimeout(() => {
+          //   this.router.navigate(['user/tasks']);
+          // }, 500);
         }else{
           this.toastr.error(response.message, 'System Error. Please contact administrator',{timeOut: 3000,extendedTimeOut: 0});
           setTimeout(() => {

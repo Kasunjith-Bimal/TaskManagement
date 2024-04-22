@@ -1,0 +1,61 @@
+<app-task-loader *ngIf="isLoading"></app-task-loader>
+<div class="container mt-3">
+    <!-- <h2>{{ isCreateTask ? 'Add Task' : 'Update Task' }}</h2> -->
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="container mt-5">
+
+        <div class="row">
+            <div class="col-sm-3">
+                <!-- Title -->
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" formControlName="title" class="form-control">
+                    <div *ngIf="taskForm.get('title')?.hasError('required') && taskForm.get('title')?.touched" class="text-danger">
+                        Title is required.
+                    </div>
+                    <div *ngIf="taskForm.get('title')?.hasError('maxlength') && taskForm.get('title')?.touched" class="text-danger">
+                        Maximum length is 50 characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="description" formControlName="description" class="form-control"></textarea>
+                    <div *ngIf="taskForm.get('description')?.hasError('required') && taskForm.get('description')?.touched" class="text-danger">
+                        Description is required.
+                    </div>
+                    <div *ngIf="taskForm.get('description')?.hasError('maxlength') && taskForm.get('description')?.touched" class="text-danger">
+                        Maximum length is 200 characters.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <!-- Due Date -->
+                <div class="form-group">
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" formControlName="dueDate" class="form-control">
+                    <div *ngIf="taskForm.get('dueDate')?.hasError('required') && taskForm.get('dueDate')?.touched" class="text-danger">
+                        Due Date is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <!-- Complete -->
+                <div class="form-group">
+                    <label for="isComplete">Complete:</label>
+                    <input type="checkbox" formControlName="isComplete" class="form-check">
+                </div>
+            </div>
+        </div>
+
+        <div style="padding-top: 20px;">
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">{{ isCreateTask ? 'Add ' : 'Update' }} </button>
+        </div>
+
+    </form>
+</div>

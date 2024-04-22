@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
               if(registerValue.role == 1){
                 this.router.navigate(['admin/users']);
               }else{
-                this.router.navigate(['user/userDetail']); 
+                this.router.navigate(['user/tasks']); 
               }
             }, 500);
           }else{

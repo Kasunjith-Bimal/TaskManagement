@@ -22,7 +22,8 @@ export class TaskSearchPipe implements PipeTransform {
         task.id.toString(),
         task.dueDate ? this.formatDate(task.dueDate ) : '', // Custom formatDate function used for readability
         task.description,
-        isComplete ,
+        task.title,
+        isComplete,
       ].map(field => field ? field.toLowerCase() : ''); // Convert all fields to lowercase, ensuring empty string for nulls
 
       // Check if any field includes the searchText

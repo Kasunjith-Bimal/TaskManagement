@@ -45,7 +45,7 @@ export class ChangePasswordComponent implements OnInit {
             this.router.navigate(['admin/users']);
           }else{
             //employee Role 
-            this.router.navigate(['user/userDetail']);
+            this.router.navigate(['user/tasks']);
           }
         }
        

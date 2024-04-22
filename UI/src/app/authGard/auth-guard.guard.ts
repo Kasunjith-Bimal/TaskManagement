@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
         case 'Admin':
           return '/admin/admins';
         case 'User':
-          return '/user/userDetail'; // Adjust this route as per your structure
+          return '/user/tasks'; // Adjust this route as per your structure
         default:
           return '/authorize/login';
       }

@@ -8,12 +8,16 @@ import { TaskListItemComponent } from './task/task-list/task-list-item/task-list
 import { TaskFormComponent } from './task/task-form/task-form.component';
 import { TaskSearchPipe } from './pipe/task-search.pipe';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { TaskLoaderComponent } from './task-loader/task-loader.component';
+import { TaskinlineComponent } from './task/task-inline/task-inline.component';
 
 
 
 const routes: Routes = [
   { path: 'userDetail', component: UserDetailComponent },
-  { path: 'tasks', component: TaskListComponent }
+  { path: 'tasks', component: TaskListComponent },
+  { path: 'tasks/:id/edit', component: TaskFormComponent },
+  { path: 'tasks/add', component: TaskFormComponent },
 ];
 
 @NgModule({
@@ -23,7 +27,9 @@ const routes: Routes = [
     TaskListItemComponent,
     TaskFormComponent,
     TaskSearchPipe,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    TaskLoaderComponent,
+    TaskinlineComponent
   ],
   imports: [
     CommonModule,

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['admin/users']);
       }else{
         //employee Role 
-        this.router.navigate(['user/userDetail']);
+        this.router.navigate(['user/tasks']);
       }
     }else{
       this.loadingForm = true;
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['admin/users']);
               }else{
                 //employee Role 
-                this.router.navigate(['user/userDetail']);
+                this.router.navigate(['user/tasks']);
               }
             }, 500);
            

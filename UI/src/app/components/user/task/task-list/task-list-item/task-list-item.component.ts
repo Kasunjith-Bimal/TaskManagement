@@ -21,7 +21,7 @@ export class TaskListItemComponent {
   }
 
   editTask(taskId: number){
-    this.router.navigate(['/tasks/'+taskId+'/edit']);
+    this.router.navigate(['user/tasks/'+taskId+'/edit']);
   }
 
   editInLine(taskId: number){

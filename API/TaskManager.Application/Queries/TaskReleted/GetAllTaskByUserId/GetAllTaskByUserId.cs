@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Application.Queries.TaskReleted.GetTaskById;
 using TaskManager.Application.Wrappers;
+using TaskManager.Domain.Entities;
 using TaskManager.Domain.Interfaces;
 using TaskManager.Domain.Services;
 
@@ -65,7 +66,7 @@ namespace TaskManager.Application.Queries.TaskReleted.GetAllTaskByUserId
 
                                             var response = new GetAllTaskByUserIdResponse
                                             {
-                                                tasks = findTasks
+                                                tasks = findTasks.OrderByDescending(x => x.DueDate).ToList()
                                             };
 
                                             await context.RespondAsync(ResponseWrapper<GetAllTaskByUserIdResponse>.Success("Successfuly get task", response));
@@ -73,8 +74,13 @@ namespace TaskManager.Application.Queries.TaskReleted.GetAllTaskByUserId
                                         }
                                         else
                                         {
-                                            this.logger.LogInformation($"[GetAllTaskByUserId] Failed to get task id {context.Message.UserId}");
-                                            await context.RespondAsync(ResponseWrapper<GetAllTaskByUserIdResponse>.Fail("Failed to get task Invalid Task Id"));
+                                            var response = new GetAllTaskByUserIdResponse
+                                            {
+                                                tasks = new List<TaskDetail>()
+                                            };
+
+                                            this.logger.LogInformation($"[GetAllTaskByUserId] Empty to get tasks id {context.Message.UserId}");
+                                            await context.RespondAsync(ResponseWrapper<GetAllTaskByUserIdResponse>.Success("Successfuly get task", response));
 
                                         }
                                     }

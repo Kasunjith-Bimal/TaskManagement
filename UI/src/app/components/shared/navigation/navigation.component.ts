@@ -36,6 +36,7 @@ export class NavigationComponent implements OnInit {
        //console.log("Role",this.role);
        this.currentLogUserSubscription = this.authorizeService.getLoggedInUser().subscribe((user) => {
          this.currentLogUser = user;
+         this.isLoggedIn = true; 
          this.role = this.authorizeService.getRoleusingToken();
          
          if(this.role == "Admin"){
@@ -44,7 +45,7 @@ export class NavigationComponent implements OnInit {
            }
          }else{
            if( this.activeLink == ''){
-             this.activeLink = 'user/userDetail';
+             this.activeLink = 'user/tasks';
            }
           
          }
