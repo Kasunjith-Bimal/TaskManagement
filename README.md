@@ -41,17 +41,17 @@ This project is built using a variety of technologies and patterns to ensure sca
 ### Installation API
 1. Clone the repository:
 ```
- git clone [https://github.com/Kasunjith-Bimal/Employee.git](https://github.com/Kasunjith-Bimal/TaskManagement.git)
+ git clone https://github.com/Kasunjith-Bimal/TaskManagement.git
  ```
 2. Navigate to the project directory:
  ```
- cd Employee
+ cd TaskManagement
  ```
 3. Navigate API Project 
  ```
  cd API
  ```
-4. Navigate Employee Folder And open Employee.sln
+4. Navigate TaskManager.API Folder And open TaskManager.API.sln
 5. Right Click Solution File Clean and Rebuild Project  
 
 ### Database Setup
