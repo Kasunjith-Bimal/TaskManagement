@@ -1,1 +1,31 @@
-<p>task-list works!</p>
+<div class="container">
+  <!-- <div class="input-group" style="padding-bottom: 20px;padding-top:120;">
+      <div class="form-outline" data-mdb-input-init>
+        <input type="search" name="search" [(ngModel)]="searchText"  placeholder="search..."/>
+      </div>
+  </div> -->
+  <Br>
+  <div class="row">
+    <div class="col-lg-6">
+        <div class="input-group mb-3">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchText">
+        </div>
+    </div>
+  </div>
+  <div class="table">
+      <div class="table-row">
+        <div class="table-cell">Title</div>
+        <div class="table-cell">Description</div>
+        <div class="table-cell">DueDate</div>
+        <div class="table-cell">Completed</div>
+        <div class="table-cell">Action</div>
+      </div>
+  
+      <app-task-list-item *ngFor="let task of tasks | taskSearch: searchText" [taskdetail]="task" (deleteTaskEvent)="deleteTaskEventClick($event)" (editTaskCheckBoxEvent)="editTaskCheckBoxEventChange($event)"></app-task-list-item>
+  </div>
+</div>
+
+<app-confirmation-dialog *ngIf="showConfirmation" 
+                         [message]="'Do you really want to delete this item?'"
+                         (confirm)="onConfirmDelete()"
+                         (cancel)="onCancelDelete()"></app-confirmation-dialog>

@@ -1,0 +1,15 @@
+.table {
+    display: flex;
+    flex-direction: column; /* Each div is a column */
+  }
+  
+  .table-row {
+    display: flex;
+    flex-direction: row; /* Each div is a row */
+  }
+  
+  .table-cell {
+    border: 1px solid #ccc;
+    padding: 8px;
+    flex: 1; /* Distribute space evenly among cells */
+  }

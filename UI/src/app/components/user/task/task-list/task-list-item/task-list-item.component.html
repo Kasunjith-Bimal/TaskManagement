@@ -1,1 +1,20 @@
-<p>task-list-item works!</p>
+<div class="table-row" *ngIf="taskdetail">
+    <div class="table-cell">{{taskdetail.title}}</div>
+    <div class="table-cell">{{taskdetail.description}}</div>
+    <div class="table-cell">{{taskdetail.dueDate | date:'medium' }}</div>
+    <div class="table-cell">
+        {{taskdetail.isComplete}}
+        <input type="checkbox" [(ngModel)]="taskdetail.isComplete" (change)="onCheckboxChange($event,taskdetail)" />
+    </div>
+    
+    <div class="table-cell">  
+
+          <button type="button" class="btn btn-outline-success" style="margin-right:10px" (click)="editTask(taskdetail.id)">
+           edit
+          </button>
+          
+          <button type="button" class="btn btn-danger"  (click)="deleteTask(taskdetail.id)">
+            delete
+          </button>
+  </div>
+</div>

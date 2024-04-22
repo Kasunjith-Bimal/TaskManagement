@@ -42,7 +42,7 @@ namespace TaskManager.Application.Queries.UserReleted.GetUserById
 
                         var response = new GetUserByIdResponse
                         {
-                            employee = new GetUserByIdDetail
+                            user = new GetUserByIdDetail
                             {
                                 Id = findEmployee.Id,
                                 Email = findEmployee.Email,

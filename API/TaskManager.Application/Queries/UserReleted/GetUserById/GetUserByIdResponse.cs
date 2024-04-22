@@ -12,7 +12,7 @@ namespace TaskManager.Application.Queries.UserReleted.GetUserById
 {
     public class GetUserByIdResponse
     {
-        public GetUserByIdDetail employee { get; set; }
+        public GetUserByIdDetail user { get; set; }
 
     }
 

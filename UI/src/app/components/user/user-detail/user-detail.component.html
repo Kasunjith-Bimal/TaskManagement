@@ -1,1 +1,17 @@
-<p>user-detail works!</p>
+<br>
+<div class="card mb-3 custom-card-spacing" style="max-width: 540px" *ngIf="user">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="assets/images/useravater.png" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <!-- Your item details here -->
+          <h5 class="card-title"> User </h5>
+          Name :  <h5 class="card-title"> {{ user.fullName }}</h5>
+          Email : <p class="card-text"> {{ user.email }}</p>
+          Active : <p class="card-text"> {{ user.isActive }}</p>
+        </div>
+    </div>
+  </div>
+</div>

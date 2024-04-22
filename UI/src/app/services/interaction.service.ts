@@ -6,5 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class InteractionService {
   public loggedInUserSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public tasksCount: BehaviorSubject<number> = new BehaviorSubject(0);
   constructor() { }
+
+  sendTaskCount(count: number){
+    this.tasksCount.next(count);
+  }
 }

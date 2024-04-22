@@ -7,11 +7,12 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
             <li class="nav-item" *ngIf="isLoggedIn && role=='Admin'"><a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="admin/users">User List</a></li>
-            <li class="nav-item" *ngIf="isLoggedIn && role=='User'"><a class="nav-link" routerLinkActive="active" routerLink="user/userDetail">Employee Detail</a></li>
+            <li class="nav-item" *ngIf="isLoggedIn && role=='User'"><a class="nav-link" routerLinkActive="active" routerLink="user/userDetail">User Detail</a></li>
+            <li class="nav-item" *ngIf="isLoggedIn && role=='User'"><a class="nav-link" routerLinkActive="active" routerLink="user/tasks">Tasks</a></li>
             <li class="nav-item" *ngIf="isLoggedIn"><a class="nav-link" routerLinkActive="active" routerLink="authorize/changepassword">Change Password</a></li>
             <li class="nav-item" *ngIf="isLoggedIn && role=='Admin'"><a class="nav-link" routerLinkActive="active" routerLink="authorize/register">Register</a></li>
         </ul>
-        <span class="navbar-text" *ngIf="isLoggedIn && currentLogUser">
+        <span class="navbar-text ml-auto" *ngIf="isLoggedIn && currentLogUser">
             {{currentLogUser.FullName}} | ({{currentLogUser.Email}})
             <button class="btn btn-outline-info" (click)="logout()">Logout</button>
         </span>

@@ -6,12 +6,14 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { TaskListItemComponent } from './task/task-list/task-list-item/task-list-item.component';
 import { TaskFormComponent } from './task/task-form/task-form.component';
+import { TaskSearchPipe } from './pipe/task-search.pipe';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 
 
 const routes: Routes = [
   { path: 'userDetail', component: UserDetailComponent },
- 
+  { path: 'tasks', component: TaskListComponent }
 ];
 
 @NgModule({
@@ -20,6 +22,8 @@ const routes: Routes = [
     TaskListComponent,
     TaskListItemComponent,
     TaskFormComponent,
+    TaskSearchPipe,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
