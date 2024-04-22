@@ -15,7 +15,8 @@ import { NavigationComponent } from './components/shared/navigation/navigation.c
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
-
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,17 +24,20 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
     ConfirmationDialogComponent,
     LoaderComponent,
     NavigationComponent,
+   FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: false,
       closeButton: false,
     }),
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

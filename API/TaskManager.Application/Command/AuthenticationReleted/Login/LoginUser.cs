@@ -31,15 +31,19 @@ namespace TaskManager.Application.Command.AuthenticationReleted.Login
             try
             {
                 this.logger.LogInformation($"[LoginUser] Received event");
-                if ((!String.IsNullOrEmpty(context.Message.Password))){
+                if ((!String.IsNullOrEmpty(context.Message.Password)))
+                {
                     this.logger.LogInformation($"[LoginUser] Check Email is Empty");
                     if (!String.IsNullOrEmpty(context.Message.Email))
                     {
                         this.logger.LogInformation($"[LoginUser] Check Email is exsist");
                         var checkExistingEmployee = await this.userService.GetUserByEmailAsync(context.Message.Email);
-                        if (checkExistingEmployee.IsActive)
+                       
+
+                        if (checkExistingEmployee != null)
                         {
-                            if (checkExistingEmployee != null)
+
+                            if (checkExistingEmployee.IsActive)
                             {
                                 var chekPasswordCurrect = await this.userService.CheckPasswordAsync(checkExistingEmployee, context.Message.Password);
 
@@ -77,20 +81,21 @@ namespace TaskManager.Application.Command.AuthenticationReleted.Login
                                     this.logger.LogInformation($"[LoginUser] password mismatch");
                                     await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("password not found"));
                                 }
+
                             }
                             else
                             {
-                                this.logger.LogInformation($"[LoginUser] Email address mismatch");
-                                await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("Email address not found"));
+                                this.logger.LogInformation($"[LoginUser] Inactive user");
+                                await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("Inactive user"));
+
                             }
+                            
                         }
                         else
                         {
-                            this.logger.LogInformation($"[LoginUser] Inactive user");
-                            await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("Inactive user"));
-
+                            this.logger.LogInformation($"[LoginUser] Email address mismatch");
+                            await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("Email address not found"));
                         }
-                       
                     }
                     else
                     {
@@ -103,7 +108,7 @@ namespace TaskManager.Application.Command.AuthenticationReleted.Login
                     this.logger.LogInformation($"[LoginUser] password cannot be empty");
                     await context.RespondAsync(ResponseWrapper<LoginUserResponse>.Fail("password cannot be empty"));
                 }
-             
+
             }
             catch (Exception ex)
             {

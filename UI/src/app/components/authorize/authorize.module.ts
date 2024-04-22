@@ -10,6 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AuthGuard } from 'src/app/authGard/auth-guard.guard';
 
 
+
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -28,7 +29,7 @@ const routes: Routes = [
   declarations: [
     LoginComponent,
     ChangePasswordComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     CommonModule,

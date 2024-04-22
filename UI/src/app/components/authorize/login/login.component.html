@@ -1,1 +1,49 @@
-<p>login works!</p>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-5">
+          <img src="assets/images/Todo.png"
+            class="img-fluid" alt="Sample image">
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <form  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
+            <!-- Email input -->
+            <div data-mdb-input-init class="form-outline mb-4">
+              <label class="form-label" for="username">Email</label>
+              <input type="email" formControlName="username" id="username" required class="form-control form-control-lg"
+                placeholder="Enter a valid email address" />
+                <div *ngIf="loginForm.get('username')?.invalid && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched)">
+                    <label for="username" class="text-danger">Valid email is required</label>
+                </div>
+            </div>
+  
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-3">
+              <label class="form-label" for="password">Password</label>
+              <input type="password" formControlName="password" id="password" required class="form-control form-control-lg"
+                placeholder="Enter password" />
+                <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+                    <label for="password" class="text-danger">Password is required</label>
+                </div>
+            </div>
+  
+        
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <button  data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;" type="submit" [disabled]="!loginForm.valid">Login</button>
+                <div *ngIf="isErrorShowing" >
+                    <label class="text-danger">{{errorMessage}}</label>
+                </div>
+                <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
+                  class="link-danger" routerLink="/authorize/register">Register</a></p>
+
+                <p class="small fw-bold mt-2 pt-1 mb-0">Do you want to change password? <a href="#!"
+                  class="link-danger" routerLink="/authorize/changepassword">change password</a></p>
+            </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
