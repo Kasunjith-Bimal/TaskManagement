@@ -39,20 +39,20 @@ This project is built using a variety of technologies and patterns to ensure sca
 - Any other dependencies
 
 ### Installation API
-1. Clone the repository:
+1). Clone the repository:
 ```
  git clone https://github.com/Kasunjith-Bimal/TaskManagement.git
  ```
-2. Navigate to the project directory:
+2). Navigate to the project directory:
  ```
  cd TaskManagement
  ```
-3. Navigate API Project 
+3). Navigate API Project 
  ```
  cd API
  ```
-4. Navigate TaskManager.API Folder And open TaskManager.API.sln
-5. Right Click Solution File Clean and Rebuild Project  
+4). Navigate TaskManager.API Folder And open TaskManager.API.sln
+5). Right Click Solution File Clean and Rebuild Project  
 
 ### Database Setup
 To set up and update the database:
