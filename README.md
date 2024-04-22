@@ -62,18 +62,21 @@ Clean and Rebuild Project
 ### Database Setup
 To set up and update the database:
 
-1. **change connection string in appsettings.json:**
+1). **change connection string in appsettings.json:**
 
 ```
 "ConnectionStrings": {
   "DefaultConnection": "Server={{severName}};Database={{databaseName}};Trusted_Connection=True;Encrypt=False;"
 },
 ```
-2. **Change seed data before Add migration (no nead to change) :**
-  1. ** Change seed data before Add migration **
+2). **Change seed data before Add migration (no nead to change) :**
+   
+  1). ** Change seed data before Add migration **
+   
    ``` 
    Edit TaskManagerDbContext.cs class inside data 
    ```
+
    ```
    protected override void OnModelCreating(ModelBuilder builder)
    {
@@ -118,12 +121,12 @@ To set up and update the database:
    }
   ```
 
-   2. if not change TaskManagerDbContext.cs you can log system using (admin user)
+  2). if not change TaskManagerDbContext.cs you can log system using (admin user)
    ```
    Email : kasunysoft@gmail.com
    Password : KasunJith123@
    ```
-3. **get package manager console for TaskManager.Infrastructure class library:** 
+3). **get package manager console for TaskManager.Infrastructure class library:** 
   
   1. **Add a Migration:**
    ```
