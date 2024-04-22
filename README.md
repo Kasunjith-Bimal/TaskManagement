@@ -51,9 +51,14 @@ This project is built using a variety of technologies and patterns to ensure sca
  ```
  cd API
  ```
-4). Navigate TaskManager.API Folder And open TaskManager.API.sln
-5). Right Click Solution File Clean and Rebuild Project  
-
+4). Navigate TaskManager.API Folder 
+ ```
+open TaskManager.API.sln
+ ```
+5). Right Click Solution File.
+ ```
+Clean and Rebuild Project  
+ ```
 ### Database Setup
 To set up and update the database:
 
