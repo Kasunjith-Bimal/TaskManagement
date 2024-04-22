@@ -1,1 +1,23 @@
-<p>user-list works!</p>
+<app-admin-loader *ngIf="isLoading"></app-admin-loader> 
+<div class="container">
+    <h2>User List</h2>
+    <div class="row">
+      <div class="col">
+        <div class="col-3">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search..." aria-label="Search" [(ngModel)]="searchText">
+            </div>
+        </div>
+        <div class="user-list">
+          <div class="user-header">
+            <div class="row">
+              <div class="col-md-3">Name</div>
+              <div class="col-md-3">Email</div>
+              <div class="col-md-3">Active</div>
+            </div>
+          </div>
+          <app-user-list-item *ngFor="let user of users  | userSearch: searchText" [user]="user"></app-user-list-item>
+        </div>
+      </div>
+    </div>
+  </div>

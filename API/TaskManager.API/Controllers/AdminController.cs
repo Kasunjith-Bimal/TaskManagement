@@ -21,7 +21,7 @@ namespace TaskManager.API.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("users/{id}")]
         [CustomAuthorize("Admin")]
         public async Task<IActionResult> GetUserByid(string id)
         {

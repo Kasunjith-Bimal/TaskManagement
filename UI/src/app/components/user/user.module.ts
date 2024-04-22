@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TaskListComponent } from './task/task-list/task-list.component';
+import { TaskListItemComponent } from './task/task-list/task-list-item/task-list-item.component';
+import { TaskFormComponent } from './task/task-form/task-form.component';
+
 
 
 const routes: Routes = [
@@ -12,7 +16,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserDetailComponent
+    UserDetailComponent,
+    TaskListComponent,
+    TaskListItemComponent,
+    TaskFormComponent,
   ],
   imports: [
     CommonModule,

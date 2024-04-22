@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserListItemComponent } from './user-list/user-list-item/user-list-item.component';
+import { UserSearchPipe } from './pipes/user-search.pipe';
+import { AdminLoaderComponent } from './admin-loader/admin-loader.component';
+
 
 
 const routes: Routes = [
@@ -14,7 +17,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
    UserListComponent,
-   UserListItemComponent
+   UserListItemComponent,
+   UserSearchPipe,
+   AdminLoaderComponent
   ],
   imports: [
     CommonModule,
