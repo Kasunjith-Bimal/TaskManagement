@@ -64,7 +64,7 @@ To set up and update the database:
   "DefaultConnection": "Server={{severName}};Database={{databaseName}};Trusted_Connection=True;Encrypt=False;"
 },
 ```
-2. **Change seed data before Add migration (no nead to chnage) :**
+2. **Change seed data before Add migration (no nead to change) :**
   1. ** Change seed data before Add migration **
    ``` 
    Edit TaskManagerDbContext.cs class inside data 
