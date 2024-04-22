@@ -71,7 +71,7 @@ To set up and update the database:
 ```
 2). **Change seed data before Add migration (no nead to change) :**
    
-  1). ** Change seed data before Add migration **
+  ** Change seed data before Add migration **
    
    ``` 
    Edit TaskManagerDbContext.cs class inside data 
@@ -121,24 +121,26 @@ To set up and update the database:
    }
   ```
 
-  2). if not change TaskManagerDbContext.cs you can log system using (admin user)
+   if not change TaskManagerDbContext.cs you can log system using (admin user)
+   
    ```
    Email : kasunysoft@gmail.com
    Password : KasunJith123@
    ```
+
 3). **get package manager console for TaskManager.Infrastructure class library:** 
   
-  1. **Add a Migration:**
+  **Add a Migration:**
    ```
    Add-Migration {{migrationName}}
    ```
    Replace MigrationName with a descriptive name for your migration.
    
-  2. **Update the Database:**
+ **Update the Database:**
    ```
    update-database
    ```
-4. **change appsetting json**
+4). **change appsetting json**
  ```
  "JWT": {
   "ValidAudience": "{your api base url}",
