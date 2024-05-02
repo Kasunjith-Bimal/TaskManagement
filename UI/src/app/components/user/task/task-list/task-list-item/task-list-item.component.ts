@@ -12,6 +12,7 @@ import { TaskService } from 'src/app/services/task.service';
 export class TaskListItemComponent {
   @Output() deleteTaskEvent = new EventEmitter<number>();
   @Output() editTaskCheckBoxEvent = new EventEmitter<Task>();
+  @Output() editInLineEvent = new EventEmitter<number>();
   @Input() taskdetail?: Task;
   constructor(private taskService: TaskService,private toastr: ToastrService,private router:Router) {
   }
@@ -25,12 +26,14 @@ export class TaskListItemComponent {
   }
 
   editInLine(taskId: number){
-
+   this.editInLineEvent.emit(taskId);
   }
 
   onCheckboxChange(event : any,task: Task){
     this.editTaskCheckBoxEvent.emit(task);
   }
+
+  
 }
 
 

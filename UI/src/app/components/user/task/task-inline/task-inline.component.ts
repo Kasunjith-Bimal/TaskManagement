@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -10,12 +10,16 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './task-inline.component.html',
   styleUrls: ['./task-inline.component.css']
 })
-export class TaskinlineComponent implements OnInit {
+export class TaskinlineComponent implements OnInit,OnChanges {
   public isCreateTask : boolean = true;
   @Output() addTaskInLineEvent = new EventEmitter<Task>();
+
+  @Output() editTaskInLineEvent = new EventEmitter<Task>();
   isLoading : boolean = false;
   taskForm!: FormGroup;
-  taskId : number = 0;
+  //taskId : number = 0;
+   @Input() taskId?: number;
+  
   public task: Task = {
     id: 0, 
     title: '', 
@@ -34,18 +38,15 @@ export class TaskinlineComponent implements OnInit {
       isComplete : [false]
     });
   }
-
-  
-
- 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+  const {taskId} = changes;
+    if(taskId.currentValue){
     
-    this.route.params.subscribe(params => {
-      if (params['id']) {
+      if (taskId && +taskId.currentValue > 0) {
         this.isLoading = true;
         this.isCreateTask = false;
-        this.taskId = Number(params['id'])
-        this.loadtaskData(this.taskId);
+        // this.taskId = Number(params['id'])
+        this.loadtaskData(taskId.currentValue);
       }else{
         this.isCreateTask = true; 
         let taskDate =  new Date(this.task.dueDate);
@@ -56,7 +57,40 @@ export class TaskinlineComponent implements OnInit {
           isComplete : false
         });
       }
-    });
+    }else{
+      this.isCreateTask = true; 
+      let taskDate =  new Date(this.task.dueDate);
+      this.taskForm.setValue({
+        title: this.task.title,
+        description: this.task.description,
+        dueDate: taskDate.toISOString().split('T')[0],
+        isComplete : false
+      });
+    }
+  }
+
+  
+
+ 
+  ngOnInit(): void {
+    
+    
+      // if (this.taskId && this.taskId > 0) {
+      //   this.isLoading = true;
+      //   this.isCreateTask = false;
+      //   // this.taskId = Number(params['id'])
+      //   this.loadtaskData(this.taskId);
+      // }else{
+      //   this.isCreateTask = true; 
+      //   let taskDate =  new Date(this.task.dueDate);
+      //   this.taskForm.setValue({
+      //     title: this.task.title,
+      //     description: this.task.description,
+      //     dueDate: taskDate.toISOString().split('T')[0],
+      //     isComplete : false
+      //   });
+      // }
+    
   }
 
   loadtaskData(taskId : number){
@@ -154,6 +188,7 @@ export class TaskinlineComponent implements OnInit {
         if(response.succeeded){
           this.toastr.success('Task updated successfully', 'Success');
           console.log('Task updated successfully');
+          this.editTaskInLineEvent.emit(response.payload.task);
           setTimeout(() => {
             this.router.navigate(['user/tasks']);
           }, 500);

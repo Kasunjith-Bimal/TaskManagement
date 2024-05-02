@@ -24,6 +24,7 @@ export class TaskListComponent implements OnInit {
   showConfirmation : boolean = false;
   deleteId : number = 0;
   showAddInile : boolean = false;
+  editInlineTaskId : number= 0;
  constructor(private taskService: TaskService,private toastr: ToastrService,private interactionService: InteractionService,private userService : UserService,private authorizeService : AuthorizeService,private router: Router) {
  }
  ngOnInit(): void {
@@ -127,6 +128,21 @@ addTaskInLineEventClick(event: Task){
   this.tasks = [...this.tasks, event]; // Add the new task to the end of the array
   this.tasks.sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()); // Sort the array
   this.interactionService.sendTaskCount(this.tasks.length);
+}
+
+editInlineEvent(event : number){
+  this.showAddInile = true;
+  this.editInlineTaskId = event;
+}
+
+editTaskInLineEventChange(event : Task){
+  let tasKidWithoutList: Task[] =  this.tasks.filter(x=>x.id != event.id);
+  tasKidWithoutList.unshift(event);
+  this.tasks = tasKidWithoutList;
+  this.tasks.sort((a, b) => new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime()); // Sort the array
+  this.interactionService.sendTaskCount(this.tasks.length);
+
+
 }
 
 }

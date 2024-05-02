@@ -25,17 +25,17 @@
         <div class="table-cell">Action</div>
       </div>
   
-      <app-task-list-item *ngFor="let task of tasks | taskSearch: searchText" [taskdetail]="task" (deleteTaskEvent)="deleteTaskEventClick($event)" (editTaskCheckBoxEvent)="editTaskCheckBoxEventChange($event)"></app-task-list-item>
+      <app-task-list-item *ngFor="let task of tasks | taskSearch: searchText" [taskdetail]="task" (deleteTaskEvent)="deleteTaskEventClick($event)" (editTaskCheckBoxEvent)="editTaskCheckBoxEventChange($event)" (editInLineEvent)="editInlineEvent($event)"></app-task-list-item>
   </div>
 </div>
 <div class="container">
   <label> Add task using inline </label>
   <input type="checkbox" name="showAddInile" [(ngModel)]="showAddInile" class="form-check">
-  <app-taskinline *ngIf="showAddInile" (addTaskInLineEvent)="addTaskInLineEventClick($event)" ></app-taskinline>
+  <app-taskinline *ngIf="showAddInile" (editTaskInLineEvent)="editTaskInLineEventChange($event)" (addTaskInLineEvent)="addTaskInLineEventClick($event)" [taskId]="editInlineTaskId"></app-taskinline>
 </div>
 
 
 <app-confirmation-dialog *ngIf="showConfirmation" 
                          [message]="'Do you really want to delete this item?'"
                          (confirm)="onConfirmDelete()"
-                         (cancel)="onCancelDelete()"></app-confirmation-dialog>
+                         (cancel)="onCancelDelete()" ></app-confirmation-dialog>
